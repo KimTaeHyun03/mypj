@@ -2,13 +2,15 @@
   display: flex;
   padding-top: 15px;
   padding-bottom: 15px;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   
 }
 .logo{
   display: flex;
   font-size: 25px;
   padding-left:20px;
+  text-decoration: none;
+  color:black;
 }
 
 
@@ -17,7 +19,7 @@
   position:fixed;
   font-size: 40px;
   right:0;
-  top:0;
+  top:0.5%;
 }
 
 
@@ -52,6 +54,7 @@
   margin: 0; /* 기본 여백 제거 */
   font-size: 18px; /* 제목 크기 */
   font-weight: bold;
+  text-align: left;
 }
 
 .subTitle span {
@@ -75,3 +78,22 @@
   padding: 20px; /* 내부 여백 */
   z-index: 1000; /* 모달이 다른 요소 위에 오도록 */
 }
+
+.searchBox{
+  width:55%;
+  display: flex;
+  margin-left: 10px;
+  border: 1px solid silver;
+  border-radius: 5px; /* 상단 좌우 모서리 둥글게 */
+  margin-top: 1.5%;
+  
+}
+
+
+.searchIcon{
+  padding-top: 1%;
+  color:gray;
+}
+
+
+

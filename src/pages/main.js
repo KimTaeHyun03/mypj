@@ -3,12 +3,15 @@ import "./../css/main.css"
 
 //lib import
 import styled from 'styled-components';
-import { Component,useState,useEffect} from 'react';
+import {Component,useState,useEffect} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 //icon import
 import { IoIosNotifications } from "react-icons/io";
 import { IoIosArrowDropdown } from "react-icons/io";
+import { CiSearch } from "react-icons/ci";
+
 
 
 
@@ -20,6 +23,13 @@ let StyledIcon = styled(IoIosArrowDropdown)`
 				margin-top:10px;
 				margin-left:3px;
 				
+`;
+
+let SearchIcon=styled(CiSearch)`
+
+color:gray;
+font-size:30px;
+
 `;
 
 
@@ -112,12 +122,19 @@ function Main (){
 function TopBar(props){
 return(
 								<div className="title">
-												<span className="logo">Coupang</span>
+												<Link className="logo" to="/main">coupang</Link>
 												<span onClick={()=>{
 												  props.chCheck(!props.check);
 												  
 												}} ><StyledIcon/></span>
 				<span className="noticeIcon"><IoIosNotifications/></span>
+  
+  <div className="searchBox">
+  <SearchIcon className="searchIcon"/>
+  <span className="searchIcon"> 쿠팡에서 검색하세요! </span>
+  </div>
+  
+  
 								</div>
 				)
 };
@@ -141,7 +158,7 @@ function DropModal(props){
 function IdPw(props){
 				return(
 				<>
-				<h1>Json 파일 axios로 불러와서 출력하는 예제인데 컴포넌트를 곁들인... 버튼 하나 만들고 안보이게 해놓을거임</h1>
+				<h1>Json 파일 axios로 불러와서 출력하는 예제 ㅡ 버튼 하나 만들고 안보이게 해놓을거임</h1>
       <ul>
           {props.userData.length > 0 ? (
             props.userData.map((user) => (
