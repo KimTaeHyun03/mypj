@@ -1,9 +1,12 @@
+//css import
 import "./../css/main.css"
 
+//lib import
 import styled from 'styled-components';
 import { Component,useState,useEffect} from 'react';
 import axios from 'axios';
 
+//icon import
 import { IoIosNotifications } from "react-icons/io";
 import { IoIosArrowDropdown } from "react-icons/io";
 
@@ -24,7 +27,9 @@ let StyledIcon = styled(IoIosArrowDropdown)`
 function Main (){
 				
 				let [userData, chUser] = useState([]);
+  let [dpModal, chDpModal] = useState([]);
 				let [btn, btnSwitch] = useState(false);
+  let [check,chCheck] = useState(false);
 				
 				useEffect(() => {
     // axios로 public 폴더에 있는 data.json 파일을 불러옴
@@ -42,13 +47,35 @@ function Main (){
       });
   }, []); // 의존성 배열 추가
 				
+  
+  
+  useEffect(() => {
+    axios.get('/json/dropModal.json')
+      .then((response) => {
+        if (response.data && response.data.length > 0) {
+          chDpModal(response.data);
+        } else {
+          console.log('No data available in JSON');
+        }
+      })
+      .catch((error) => {
+        console.error('Error loading JSON:', error);
+      });
+  }, []);
 				
 				return(
 				<>
 				
-				<TopBar/>
-			<DropModal/>
-				
+				<TopBar check={check} chCheck={chCheck}/>
+  {check ?(
+    <div className="drop_modal">
+    <p> 무엇을 찾으시나요?</p>
+    {dpModal.map((item,i)=>(
+				    <DropModal item={item} chDpModal={chDpModal} i={i} />
+				    ))}
+    </div>
+    )
+    : null}
 				
 								
 								
@@ -72,8 +99,6 @@ function Main (){
       <button onClick={() => btnSwitch(!btn)}>
         {btn ? "Hide" : "Show"}
       </button>
-
-      {/* btn이 true일 때만 div 태그를 보여줌 */}
       {btn ? <IdPw userData={userData} /> : null}
     </div>
 				</>
@@ -84,32 +109,35 @@ function Main (){
 
 
 //타이틀바
-function TopBar(){
+function TopBar(props){
 return(
 								<div className="title">
 												<span className="logo">Coupang</span>
-												<span><StyledIcon/></span>
+												<span onClick={()=>{
+												  props.chCheck(!props.check);
+												  
+												}} ><StyledIcon/></span>
 				<span className="noticeIcon"><IoIosNotifications/></span>
 								</div>
 				)
 };
 
 //타이틀옆 체크 누르면 보이는 모달창임
-function DropModal(){
+function DropModal(props){
 				return(
 								<>
-												<p> 무엇을 찾으시나요?</p>
 												<div className="card">
-												<img className="logocp" src="/image/coupang.png"></img>
+												<img className="logocp" src={props.item.img}></img>
 				<div className="subTitle">
-																<h3>쿠팡</h3>
-																<span> 로켓배송으로 스마트한 쇼핑 </span>
+																<h3>{props.item.title}</h3>
+																<span> {props.item.content} </span>
 				</div>
 												</div>
 								</>
 				)
 };
 
+//userData 출력 컴포넌트
 function IdPw(props){
 				return(
 				<>

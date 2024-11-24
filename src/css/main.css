@@ -21,7 +21,7 @@
 }
 
 
-  
+
   
 .card {
   display: flex; /* Flexbox 사용 */
@@ -31,6 +31,8 @@
   border-radius: 8px; /* 카드 모서리를 둥글게 (선택 사항) */
   background-color: #f9f9f9; /* 배경색 설정 (선택 사항) */
   flex-direction: row !important;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .logocp {
@@ -60,4 +62,16 @@
 /* user정보 보이게 하는 버튼임*/
 .idpwBtn{
   display: none;
+}
+.drop_modal {
+  position: fixed;
+  bottom: 0px; /* 화면 하단에 고정 */
+  left: 0;   /* 화면 왼쪽에 고정 */
+  width: 100%; /* 화면 너비 전체 사용 */
+  background: white; /* 모달 배경색 */
+  border: 1px solid #ddd;
+  border-top-left-radius: 16px; /* 상단 좌우 모서리 둥글게 */
+  border-top-right-radius: 16px;
+  padding: 20px; /* 내부 여백 */
+  z-index: 1000; /* 모달이 다른 요소 위에 오도록 */
 }
